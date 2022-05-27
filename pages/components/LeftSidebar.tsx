@@ -5,8 +5,9 @@ import SidebarRow from './LeftSidebarRow'
 export default function LeftSidebar() {
   return (
     <main
-      className="flex flex-col items-center px-4 sm:items-center 
-    md:items-center  lg:col-span-2 lg:items-start"
+      className=" flex flex-col items-center px-4 
+    sm:items-end  md:items-end lg:col-span-2 lg:items-start 
+    xl:col-span-2 xl:items-start"
     >
       <div className="ml-2">
         <Image src="/twitter-icon.png" height={25} width={25} />

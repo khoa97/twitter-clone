@@ -6,7 +6,8 @@ import {
 import Image from 'next/image'
 import React, { useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 function Tweetbox() {
   const [text, setText] = useState<string>('')
 
@@ -32,9 +33,17 @@ function Tweetbox() {
             <EmojiHappyIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <LocationMarkerIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <PhotographIcon className="mr-2 h-6 w-6 cursor-pointer" />
+            <div
+              className={'mx-3 ml-auto h-6 w-6 ' + (text ? 'block' : 'hidden')}
+            >
+              <CircularProgressbar value={10} />
+            </div>
             <button
               disabled={!text}
-              className="ml-auto rounded-full bg-twitter px-5 py-2 font-semibold text-white disabled:opacity-50 "
+              className={
+                'rounded-full bg-twitter px-5 py-2 font-semibold text-white disabled:opacity-50' +
+                (text ? '' : ' ml-auto')
+              }
             >
               Tweet
             </button>
