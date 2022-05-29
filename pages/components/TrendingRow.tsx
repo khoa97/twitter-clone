@@ -1,5 +1,10 @@
-import React from 'react'
-import { TrendingRowProps } from '../../types/interfaces'
+import React from 'react';
+
+interface TrendingRowProps {
+  type: string;
+  title: string;
+  footer: string;
+}
 
 function TrendingRow({ type, title, footer }: TrendingRowProps) {
   return (
@@ -8,7 +13,7 @@ function TrendingRow({ type, title, footer }: TrendingRowProps) {
       <div className="py-2 text-sm font-bold">{title}</div>
       <div className="text-sm text-gray-500">{footer}</div>
     </div>
-  )
+  );
 }
 
-export default TrendingRow
+export default TrendingRow;

@@ -2,15 +2,16 @@ import {
   EmojiHappyIcon,
   LocationMarkerIcon,
   PhotographIcon,
-} from '@heroicons/react/outline'
-import Image from 'next/image'
-import React, { useState } from 'react'
-import TextareaAutosize from 'react-textarea-autosize'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
+} from '@heroicons/react/outline';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 function Tweetbox() {
-  const [text, setText] = useState<string>('')
-  const MAX_TWEET_LENGTH = 280
+  const [text, setText] = useState<string>('');
+  const MAX_TWEET_LENGTH = 280;
 
   const styles = {
     text: {
@@ -20,16 +21,17 @@ function Tweetbox() {
     path: {
       stroke: MAX_TWEET_LENGTH - text.length < 0 ? '#f4212e' : '#1DA1F2',
     },
-  }
+  };
 
   return (
-    <div className="top-0 z-50 p-5">
+    <div className="top-0 z-50 hidden p-5 sm:block">
       <div className="flex items-start">
         <Image
+          alt="profile"
           className=" rounded-full"
           src="/default-profile.png"
-          height="50"
-          width="50"
+          height={50}
+          width={50}
         />
         <div className="flex-1">
           <TextareaAutosize
@@ -45,7 +47,7 @@ function Tweetbox() {
             <LocationMarkerIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <PhotographIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <div
-              className={'mx-3 ml-auto h-7 w-7 ' + (text ? 'block' : 'hidden')}
+              className={`mx-3 ml-auto h-7 w-7 ${text ? 'block' : 'hidden'}`}
             >
               <CircularProgressbar
                 styles={styles}
@@ -58,11 +60,11 @@ function Tweetbox() {
               />
             </div>
             <button
+              type="button"
               disabled={!text}
-              className={
-                'rounded-full bg-twitter px-5 py-2 font-semibold text-white disabled:opacity-50' +
-                (text ? '' : ' ml-auto')
-              }
+              className={`rounded-full bg-twitter px-5 py-2 font-semibold text-white disabled:opacity-50${
+                text ? '' : ' ml-auto'
+              }`}
             >
               Tweet
             </button>
@@ -70,7 +72,7 @@ function Tweetbox() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Tweetbox
+export default Tweetbox;

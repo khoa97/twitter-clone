@@ -1,10 +1,10 @@
-import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import Feed from './components/Feed'
-import LeftSidebar from './components/LeftSidebar'
-import RightSidebar from './components/RightSidebar'
+import type { GetStaticProps } from 'next';
+import Head from 'next/head';
+import Feed from './components/Feed';
+import LeftSidebar from './components/LeftSidebar';
+import RightSidebar from './components/RightSidebar';
 
-const Home: NextPage = ({ articles, trendingTweets, timelineTweets }: any) => {
+function Home({ articles, trendingTweets, timelineTweets }: any) {
   return (
     <div className="mx-auto  mt-0 max-h-screen lg:max-w-6xl">
       <Head>
@@ -13,7 +13,7 @@ const Home: NextPage = ({ articles, trendingTweets, timelineTweets }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="grid grid-cols-9">
+      <main className="grid grid-cols-10">
         <LeftSidebar />
 
         <Feed timelineTweets={timelineTweets} />
@@ -21,40 +21,39 @@ const Home: NextPage = ({ articles, trendingTweets, timelineTweets }: any) => {
         <RightSidebar articles={articles} trendingTweets={trendingTweets} />
       </main>
     </div>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  console.log(process.env.TWITTER_BEARER_TOKEN)
-  const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_TOKEN}`
+  const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_TOKEN}`;
   const TRENDING_API_URL =
-    'https://api.twitter.com/1.1/trends/place.json?id=23424977'
+    'https://api.twitter.com/1.1/trends/place.json?id=23424977';
   const TWEETS_API_URL =
-    'https://api.twitter.com/2/users/19923144/tweets?max_results=10&media.fields=preview_image_url%2Curl&expansions=attachments.media_keys%2Cauthor_id&tweet.fields=created_at&user.fields=profile_image_url,verified'
+    'https://api.twitter.com/2/users/19923144/tweets?max_results=25&media.fields=preview_image_url%2Curl&expansions=attachments.media_keys%2Cauthor_id&tweet.fields=created_at&user.fields=profile_image_url,verified';
 
   const options = {
     headers: new Headers({
       Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
     }),
-  }
+  };
   const [articlesRes, trendingsRes, timelineTweetsRes] = await Promise.all([
     fetch(NEWS_API_URL),
     fetch(TRENDING_API_URL, options),
     fetch(TWEETS_API_URL, options),
-  ])
+  ]);
   const [articlesData, trendingsData, timelinetweetsData] = await Promise.all([
     articlesRes.json(),
     trendingsRes.json(),
     timelineTweetsRes.json(),
-  ])
+  ]);
 
   return {
     props: {
       articles: articlesData.articles.slice(0, 2),
-      trendingTweets: trendingsData[0].trends.slice(0, 2),
+      trendingTweets: trendingsData[0].trends.slice(0, 4),
       timelineTweets: timelinetweetsData,
     },
-  }
-}
+  };
+};
 
-export default Home
+export default Home;

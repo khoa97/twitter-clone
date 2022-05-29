@@ -1,35 +1,41 @@
-import React from 'react'
-import Image from 'next/image'
-import TrendingRow from './TrendingRow'
-import { TrendingBoxProps } from '../../types/interfaces'
+import React from 'react';
+import TrendingRow from './TrendingRow';
+
+interface TrendingBoxProps {
+  articles: Array<{
+    title: string;
+  }>;
+  trendingTweets: Array<{
+    tweet_volume: number;
+    name: string;
+  }>;
+}
 
 function TrendingBox({ articles, trendingTweets }: TrendingBoxProps) {
   return (
     <div className="my-3 rounded-2xl bg-gray-100">
-      <p className="p-3  text-lg font-bold">What's Happening</p>
-      {articles.map((item, index) => {
+      <p className="p-3  text-lg font-bold">What&apos;s Happening</p>
+      {articles.map((item) => (
+        <TrendingRow
+          key={item.title}
+          type="News"
+          title={item.title}
+          footer=""
+        />
+      ))}
+      {trendingTweets.map((item) => {
+        const numOfTweets = (item.tweet_volume / 1000).toFixed(1);
         return (
           <TrendingRow
-            key={'article ' + index}
-            type="News"
-            title={item.title}
-            footer=""
-          />
-        )
-      })}
-      {trendingTweets.map((item, index) => {
-        const numOfTweets = (item.tweet_volume / 1000).toFixed(1)
-        return (
-          <TrendingRow
-            key={'trending ' + index}
+            key={item.name}
             type="Trending"
             title={item.name}
-            footer={numOfTweets + 'k Tweets'}
+            footer={Number(numOfTweets) > 0 ? `${numOfTweets}k Tweets` : ''}
           />
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
-export default TrendingBox
+export default TrendingBox;
