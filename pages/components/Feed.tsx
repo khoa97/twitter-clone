@@ -33,9 +33,9 @@ function Feed({ timelineTweets }: FeedProps) {
       className="col-span-8 border-x  md:col-span-6
     lg:col-span-5"
     >
-      <div className="h-10 w-10 sm:bg-orange-100 md:bg-orange-300 lg:bg-orange-600">
+      {/* <div className="h-10 w-10 sm:bg-orange-100 md:bg-orange-300 lg:bg-orange-600">
         size
-      </div>
+      </div> */}
       <p className="sticky top-0 z-50 cursor-pointer bg-white py-3 pl-5 text-xl font-bold">
         Home
       </p>
