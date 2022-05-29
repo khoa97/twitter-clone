@@ -10,9 +10,20 @@ import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 function Tweetbox() {
   const [text, setText] = useState<string>('')
+  const MAX_TWEET_LENGTH = 280
+
+  const styles = {
+    text: {
+      fontSize: '45px',
+      fill: MAX_TWEET_LENGTH - text.length < 0 ? '#f4212e' : '#1DA1F2',
+    },
+    path: {
+      stroke: MAX_TWEET_LENGTH - text.length < 0 ? '#f4212e' : '#1DA1F2',
+    },
+  }
 
   return (
-    <main className="p-5">
+    <div className="top-0 z-50 p-5">
       <div className="flex items-start">
         <Image
           className=" rounded-full"
@@ -34,9 +45,17 @@ function Tweetbox() {
             <LocationMarkerIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <PhotographIcon className="mr-2 h-6 w-6 cursor-pointer" />
             <div
-              className={'mx-3 ml-auto h-6 w-6 ' + (text ? 'block' : 'hidden')}
+              className={'mx-3 ml-auto h-7 w-7 ' + (text ? 'block' : 'hidden')}
             >
-              <CircularProgressbar value={10} />
+              <CircularProgressbar
+                styles={styles}
+                text={`${
+                  text.length < MAX_TWEET_LENGTH - 20
+                    ? ''
+                    : MAX_TWEET_LENGTH - text.length
+                }`}
+                value={(text.length / MAX_TWEET_LENGTH) * 100}
+              />
             </div>
             <button
               disabled={!text}
@@ -50,7 +69,7 @@ function Tweetbox() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

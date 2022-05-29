@@ -5,7 +5,7 @@ import SidebarRow from './LeftSidebarRow'
 export default function LeftSidebar() {
   return (
     <main
-      className=" flex flex-col items-center px-4 
+      className="sticky top-0 flex flex-col items-center self-start px-4 pt-6 
     sm:items-end  md:items-end lg:col-span-2 lg:items-start 
     xl:col-span-2 xl:items-start"
     >

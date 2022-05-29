@@ -1,11 +1,7 @@
 import React, { SVGProps } from 'react'
+import { LeftSidebarRowsProps } from '../../types/interfaces'
 
-interface Props {
-  Icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
-  title: string
-}
-
-function LeftSidebarRows({ Icon, title }: Props) {
+function LeftSidebarRows({ Icon, title }: LeftSidebarRowsProps) {
   return (
     <div
       className="duration-600 flex max-w-fit  cursor-pointer items-center space-x-2 rounded-full  
