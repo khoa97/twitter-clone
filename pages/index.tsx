@@ -1,8 +1,8 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import Feed from './components/Feed';
-import LeftSidebar from './components/LeftSidebar';
-import RightSidebar from './components/RightSidebar';
+import Feed from '../components/Feed';
+import LeftSidebar from '../components/LeftSidebar';
+import RightSidebar from '../components/RightSidebar';
 
 function Home({ articles, trendingTweets, timelineTweets }: any) {
   return (
