@@ -5,7 +5,7 @@
 
 ## How to run
 
-This repo uses the api from Twitter and [Newsapi](https://newsapi.org/). Get the api token from them and create a .env.local file in the root directory of this project. The contesnts should be:
+This repo uses the api from Twitter and [NewsAPI](https://newsapi.org/). Get the api token from them and create a .env.local file in the root directory of this project. The contesnts should be:
 
 ```bash
 TWITTER_BEARER_TOKEN=<TOKEN_HERE>
