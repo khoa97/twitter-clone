@@ -1,4 +1,8 @@
 
+## Demo
+
+[Demo](https://twitter-clone-qk2n3g864-khoa97.vercel.app/)
+
 ## How to run
 
 This repo uses the api from Twitter and [Newsapi](https://newsapi.org/). Get the api token from them and create a .env.local file in the root directory of this project. The contesnts should be:
