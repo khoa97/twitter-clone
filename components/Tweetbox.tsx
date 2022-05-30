@@ -9,7 +9,11 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-function Tweetbox() {
+interface TweetBoxProps {
+  postTweet: (text: string) => void;
+}
+
+function Tweetbox({ postTweet }: TweetBoxProps) {
   const [text, setText] = useState<string>('');
   const MAX_TWEET_LENGTH = 280;
 
@@ -60,6 +64,9 @@ function Tweetbox() {
               />
             </div>
             <button
+              onClick={() => {
+                postTweet(text);
+              }}
               type="button"
               disabled={!text}
               className="rounded-full bg-twitter px-5 py-2 font-semibold text-white hover:brightness-90 
