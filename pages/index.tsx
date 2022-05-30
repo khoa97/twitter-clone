@@ -4,7 +4,7 @@ import Feed from '../components/Feed';
 import LeftSidebar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 
-function Home({ articles, trendingTweets, timelineTweets }: any) {
+function Home({ articles, trendingTweets, timelineTweets, users }: any) {
   return (
     <div className="mx-auto  mt-0 max-h-screen lg:max-w-6xl">
       <Head>
@@ -18,7 +18,11 @@ function Home({ articles, trendingTweets, timelineTweets }: any) {
 
         <Feed timelineTweets={timelineTweets} />
 
-        <RightSidebar articles={articles} trendingTweets={trendingTweets} />
+        <RightSidebar
+          articles={articles}
+          trendingTweets={trendingTweets}
+          users={users}
+        />
       </main>
     </div>
   );
@@ -31,27 +35,34 @@ export const getStaticProps: GetStaticProps = async () => {
   const TWEETS_API_URL =
     'https://api.twitter.com/2/users/19923144/tweets?max_results=25&media.fields=preview_image_url%2Curl&expansions=attachments.media_keys%2Cauthor_id&tweet.fields=created_at&user.fields=profile_image_url,verified';
 
+  const TWITTER_USERS_URL =
+    'https://api.twitter.com/2/users?ids=2244994945%2C6253282&user.fields=profile_image_url';
   const options = {
     headers: new Headers({
       Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
     }),
   };
-  const [articlesRes, trendingsRes, timelineTweetsRes] = await Promise.all([
-    fetch(NEWS_API_URL),
-    fetch(TRENDING_API_URL, options),
-    fetch(TWEETS_API_URL, options),
-  ]);
-  const [articlesData, trendingsData, timelinetweetsData] = await Promise.all([
-    articlesRes.json(),
-    trendingsRes.json(),
-    timelineTweetsRes.json(),
-  ]);
+  const [articlesRes, trendingsRes, timelineTweetsRes, usersRes] =
+    await Promise.all([
+      fetch(NEWS_API_URL),
+      fetch(TRENDING_API_URL, options),
+      fetch(TWEETS_API_URL, options),
+      fetch(TWITTER_USERS_URL, options),
+    ]);
+  const [articlesData, trendingsData, timelinetweetsData, usersData] =
+    await Promise.all([
+      articlesRes.json(),
+      trendingsRes.json(),
+      timelineTweetsRes.json(),
+      usersRes.json(),
+    ]);
 
   return {
     props: {
       articles: articlesData.articles.slice(0, 2),
-      trendingTweets: trendingsData[0].trends.slice(0, 4),
+      trendingTweets: trendingsData[0].trends.slice(0, 2),
       timelineTweets: timelinetweetsData,
+      users: usersData.data,
     },
   };
 };

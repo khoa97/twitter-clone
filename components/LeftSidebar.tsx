@@ -35,6 +35,14 @@ export default function LeftSidebar() {
       <LeftSidebarRow Icon={CollectionIcon} title="Lists" />
       <LeftSidebarRow Icon={UserIcon} title="Profile" />
       <LeftSidebarRow Icon={DotsCircleHorizontalIcon} title="More" />
+
+      <button
+        type="button"
+        className={`hidden rounded-full bg-twitter px-16 py-3 font-semibold text-white
+        hover:brightness-90 lg:block`}
+      >
+        Tweet
+      </button>
     </main>
   );
 }

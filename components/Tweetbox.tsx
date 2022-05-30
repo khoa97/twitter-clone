@@ -62,9 +62,8 @@ function Tweetbox() {
             <button
               type="button"
               disabled={!text}
-              className={`rounded-full bg-twitter px-5 py-2 font-semibold text-white disabled:opacity-50${
-                text ? '' : ' ml-auto'
-              }`}
+              className="rounded-full bg-twitter px-5 py-2 font-semibold text-white hover:brightness-90 
+              disabled:ml-auto disabled:opacity-50 hover:disabled:brightness-100"
             >
               Tweet
             </button>

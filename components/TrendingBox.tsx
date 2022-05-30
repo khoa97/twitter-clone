@@ -13,7 +13,7 @@ interface TrendingBoxProps {
 
 function TrendingBox({ articles, trendingTweets }: TrendingBoxProps) {
   return (
-    <div className="my-3 rounded-2xl bg-gray-100">
+    <div className="my-3 rounded-2xl bg-gray-50">
       <p className="p-3  text-lg font-bold">What&apos;s Happening</p>
       {articles.map((item) => (
         <TrendingRow
