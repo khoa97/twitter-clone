@@ -64,6 +64,7 @@ export const getStaticProps: GetStaticProps = async () => {
       timelineTweets: timelinetweetsData,
       users: usersData.data,
     },
+    revalidate: 60*60
   };
 };
 
