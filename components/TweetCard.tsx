@@ -19,29 +19,27 @@ export interface TweetCardProps {
   };
 }
 
-const units = [
-  [1, "s"],
-  [60, "m"],
-  [60 * 60, "h"],
-  [60 * 60 * 24, "day"]
-];
-
-
-
 export default function TweetCard({ tweet, profile, media }: TweetCardProps) {
   function getTweetAge() {
-  const ageInSec =
+    const ageInSec =
       (new Date().valueOf() - new Date(tweet.created_at).valueOf()) / 1000;
-  let bestUnit = units[0];
-  for(const unit of units) {
-    if(ageInSec >= unit[0]) {
-        bestUnit = unit;
+    if (ageInSec < 1) {
+      return `Now`;
     }
+    if (ageInSec < 60) {
+      return `${ageInSec}s`;
+    }
+    if (ageInSec < 3600) {
+      return `${Math.round(ageInSec / 60)}m`;
+    }
+    if (ageInSec < 60 * 60 * 60) {
+      return `${Math.round(ageInSec / 60 / 60)}h`;
+    }
+    if (ageInSec < 60 * 60 * 60 * 24) {
+      return `${Math.round(ageInSec / 60 / 60 / 24)}h`;
+    }
+    return ageInSec;
   }
-  const [divisor, label] = bestUnit;
-// @ts-ignore
-  return Math.floor(ageInSec /divisor) + label;
-}
   return (
     <div className="flex  cursor-pointer items-start border-y p-4 hover:bg-gray-100">
       <div className="w-8 min-w-[40px]">
