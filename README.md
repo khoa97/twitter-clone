@@ -1,7 +1,7 @@
 
 ## Demo
 
-[Demo](https://twitter-clone-qk2n3g864-khoa97.vercel.app/)
+[Demo](https://twitter-clone-smoky-two.vercel.app/)
 
 ## How to run
 
